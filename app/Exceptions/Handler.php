@@ -7,6 +7,8 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use \App\Http\ResponseTrait;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -50,6 +52,19 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($request->wantsJson())
+            return $this->analyseApiError($exception);
+
         return parent::render($request, $exception);
+    }
+
+    public function analyseApiError(Throwable $exception)
+    {
+        switch (get_class($exception)) {
+            case \Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class:
+                return $this->respondWithNotFound();
+        }
+
+        return $this->respondWithError(1, 'An unexpected error occurred');
     }
 }
