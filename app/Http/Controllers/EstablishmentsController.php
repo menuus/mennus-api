@@ -3,8 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Establishments;
+use Illuminate\Http\Request;
+
 
 class EstablishmentsController extends Controller
 {
-    protected $model = Establishments::class;
+    function __construct()
+    {
+        parent::__construct(Establishments::class);
+    }
+
+    public function index()
+    {
+        return parent::index();
+    }
+
+    public function store(Request $request)
+    {
+        return parent::store($request);
+    }
+
+    public function show($id)
+    {
+        return parent::show($id);
+    }
+
+    public function update(Request $request, $id)
+    {
+        return parent::update($request, $id);
+    }
+
+    public function destroy($id)
+    {
+        return parent::destroy($id);
+    }
 }

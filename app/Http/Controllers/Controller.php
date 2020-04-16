@@ -15,6 +15,11 @@ class Controller extends BaseController
 
     protected $model;
 
+    function __construct($model)
+    {
+        $this->model = $model;
+    }
+
     public function index()
     {
         //TODO: trocar por respondWithCollection
