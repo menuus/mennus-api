@@ -10,14 +10,15 @@ class CreateEstablishmentsTable extends Migration
     {
         Schema::create('establishments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('foodcourt_id');
+            $table->unsignedBigInteger('food_court_id');
             $table->string('name');
             $table->string('slug');
             $table->text('description');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
             $table->softDeletes();
 
-            $table->foreign('foodcourt_id')->references('id')->on('food_courts');
+            $table->foreign('food_court_id')->references('id')->on('food_courts');
         });
     }
 

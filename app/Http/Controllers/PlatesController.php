@@ -3,11 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plates;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class PlatesController extends Controller
 {
-    function __construct()
+    protected $defaultSort = '-created_at';
+
+    // protected $allowedFields = [
+    //     'id',
+    //     'name',
+    //     'slug',
+    //     'description',
+    //     'created_at',
+    //     'updated_at',
+    // ];
+    
+    protected $allowedFilters = [
+        'name',
+        'slug',
+        'description',
+    ];
+
+    protected $allowedSorts = [
+        'updated_at',
+        'created_at',
+        'name',
+        'id',
+    ];
+
+    protected $allowedIncludes = [
+        'establishment',
+        'images',
+    ];
+
+    public function __construct()
     {
         parent::__construct(Plates::class);
     }
@@ -22,9 +53,9 @@ class PlatesController extends Controller
         return parent::store($request);
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        return parent::show($id);
+        return parent::show($request, $id);
     }
 
     public function update(Request $request, $id)

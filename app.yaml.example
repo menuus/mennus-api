@@ -2,6 +2,7 @@ runtime: php73
 
 env_variables:
    APP_ENV: production
+   APP_DEBUG: false
    APP_STORAGE: /tmp
    VIEW_COMPILED_PATH: /tmp
    DB_HOST: /cloudsql/CLOUDSQL_CONNECTION_NAME

@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-class FoodCourts extends Model
+class FoodCourts extends BaseModel
 {
-    use SoftDeletes;
-
     protected $fillable = ['name', 'description', 'slug'];
-    protected $dates = ['deleted_at'];
+
+    public function establishments()
+    {
+        return $this->hasMany(Establishments::class, 'food_court_id');
+    }
+
+    public function images()
+    {
+        return $this->belongsToMany(Images::class, 'food_courts_has_images', 'food_court_id', 'image_id');
+    }
 }

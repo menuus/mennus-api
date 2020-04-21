@@ -3,7 +3,6 @@
 namespace App\Http;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -64,9 +63,19 @@ trait ResponseTrait
      *
      * @return JsonResponse
      */
-    protected function respondWithNotFound(): JsonResponse
+    protected function respondWithNotFound($exception, $code, $msg = 'Resource not found'): JsonResponse
     {
-        return $this->respondWithError(2, 'Resource not found', Response::HTTP_NOT_FOUND);
+        return $this->respondWithError($exception, $code, $msg, Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * Return with 404 error
+     *
+     * @return JsonResponse
+     */
+    protected function respondWithBadRequest($exception, $code, $msg): JsonResponse
+    {
+        return $this->respondWithError($exception, $code, $msg, Response::HTTP_BAD_REQUEST);
     }
 
     /**
@@ -74,13 +83,23 @@ trait ResponseTrait
      *
      * @return JsonResponse
      */
-    protected function respondWithError($code, $message, $status = Response::HTTP_INTERNAL_SERVER_ERROR): JsonResponse
+    protected function respondWithError($exception, $code, $message, $status = Response::HTTP_INTERNAL_SERVER_ERROR): JsonResponse
     {
+        $error = [
+            'code' => $code,
+            'message' => $message
+        ];
+        
+        if (config('app.debug')) {
+            $error['debug_exception'] = [
+                'code' => $exception->getCode(),
+                'message' => $exception->getMessage(),
+                'stack_trace' => $exception->getTraceAsString()
+            ];
+        }
+        
         return new JsonResponse([
-            'error' => [
-                'code' => $code,
-                'message' => $message
-            ],
+            'error' => $error,
             'meta' => ['timestamp' => $this->getTimestampInMilliseconds()],
         ], $status);
     }
@@ -119,7 +138,8 @@ trait ResponseTrait
      */
     protected function ifExists($data)
     {
-        abort_if(!$data, Response::HTTP_NOT_FOUND);
+        abort_if(empty($data), Response::HTTP_NOT_FOUND);
+        abort_if($data instanceof \Illuminate\Database\Eloquent\Collection && $data->isEmpty(), Response::HTTP_NOT_FOUND);
         return $data;
     }
 }

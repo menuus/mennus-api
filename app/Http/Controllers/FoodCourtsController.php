@@ -7,6 +7,26 @@ use Illuminate\Http\Request;
 
 class FoodCourtsController extends Controller
 {
+    protected $defaultSort = '-created_at';
+
+    protected $allowedFilters = [
+        'name',
+        'slug',
+        'description',
+    ];
+
+    protected $allowedSorts = [
+        'updated_at',
+        'created_at',
+        'name',
+        'id',
+    ];
+
+    protected $allowedIncludes = [
+        'establishments',
+        'images',
+    ];
+
     function __construct()
     {
         parent::__construct(FoodCourts::class);
@@ -22,9 +42,9 @@ class FoodCourtsController extends Controller
         return parent::store($request);
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        return parent::show($id);
+        return parent::show($request, $id);
     }
 
     public function update(Request $request, $id)

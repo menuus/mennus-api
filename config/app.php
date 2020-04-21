@@ -67,7 +67,10 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // Changed from UTC because a problem in timestamps (created_at, updated_at)
+    // The seeders was inserting with GTM 0 time but, if you insert a data from
+    //   postgre, was inserting with GMT -3. Now, both inserting GMT -3
+    'timezone' => 'America/Sao_Paulo',
 
     /*
     |--------------------------------------------------------------------------
@@ -174,7 +177,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        
     ],
 
     /*

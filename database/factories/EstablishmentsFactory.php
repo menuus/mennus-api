@@ -10,7 +10,7 @@ $factory->define(Establishments::class, function (Faker $faker) {
     $foodCourtsIds = FoodCourts::pluck('id')->toArray();
     return [
         'name' => $name = $faker->company,
-        'foodcourt_id' => $faker->randomElement($foodCourtsIds),
+        'food_court_id' => $faker->randomElement($foodCourtsIds),
         'description' => $faker->sentence(6),
         'slug' => Str::slug($name, '-'),
     ];

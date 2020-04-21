@@ -13,7 +13,8 @@ class CreateFoodCourtsTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->text('description');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
             $table->softDeletes();
         });
     }
