@@ -66,7 +66,7 @@ class Controller extends BaseController
         $perPage = (int) request()->get('limit');
         $perPage = $perPage >= 1 && $perPage <= 100 ? $perPage : 20;
 
-        if (!$this->allowedSorts || !$this->allowedFields)
+        if (!isset($this->allowedSorts) || !isset($this->allowedFields))
             $allColumns = $this->getAllTableColumnsFromModel();
 
         //Doc for QueryBuilder: https://github.com/spatie/laravel-query-builder
