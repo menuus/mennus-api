@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Establishments;
+use App\Models\FoodCourts;
 use Illuminate\Database\Seeder;
 
 class EstablishmentsSeeder extends Seeder
@@ -9,6 +10,8 @@ class EstablishmentsSeeder extends Seeder
     {
         Establishments::truncate();
 
-        factory(Establishments::class, 10)->create();
+        $amount = FoodCourts::all()->count() * 5;
+
+        factory(Establishments::class, $amount)->create();
     }
 }

@@ -18,5 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('foodcourts', 'FoodCourtsController');
+Route::apiResource('food_courts', 'FoodCourtsController');
 Route::apiResource('establishments', 'EstablishmentsController');
+Route::apiResource('plates', 'PlatesController');

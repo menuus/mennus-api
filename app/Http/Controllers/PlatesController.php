@@ -2,14 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Establishments;
+use App\Models\Plates;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
-
-class EstablishmentsController extends Controller
+class PlatesController extends Controller
 {
     protected $defaultSort = '-created_at';
 
+    // protected $allowedFields = [
+    //     'id',
+    //     'name',
+    //     'slug',
+    //     'description',
+    //     'created_at',
+    //     'updated_at',
+    // ];
+    
     protected $allowedFilters = [
         'name',
         'slug',
@@ -24,14 +34,13 @@ class EstablishmentsController extends Controller
     ];
 
     protected $allowedIncludes = [
-        'food_court',
+        'establishment',
         'images',
-        'plates',
     ];
 
-    function __construct()
+    public function __construct()
     {
-        parent::__construct(Establishments::class);
+        parent::__construct(Plates::class);
     }
 
     public function index()

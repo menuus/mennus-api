@@ -3,35 +3,57 @@
 namespace App\Http\Controllers;
 
 use App\Models\FoodCourts;
-use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
 class FoodCourtsController extends Controller
 {
-    protected $model = FoodCourts::class;
+    protected $defaultSort = '-created_at';
 
-    // public function index()
-    // {
-    //     return parent::index();
-    // }
+    protected $allowedFilters = [
+        'name',
+        'slug',
+        'description',
+    ];
 
-    // public function store(Request $request)
-    // {
-    //     return parent::store($request);
-    // }
+    protected $allowedSorts = [
+        'updated_at',
+        'created_at',
+        'name',
+        'id',
+    ];
 
-    // public function show($id)
-    // {
-    //     return parent::show($id);
-    // }
+    protected $allowedIncludes = [
+        'establishments',
+        'images',
+    ];
 
-    // public function update(Request $request, $id)
-    // {
-    //     return parent::update($request, $id);
-    // }
+    function __construct()
+    {
+        parent::__construct(FoodCourts::class);
+    }
 
-    // public function destroy($id)
-    // {
-    //     return parent::destroy($id);
-    // }
+    public function index()
+    {
+        return parent::index();
+    }
+
+    public function store(Request $request)
+    {
+        return parent::store($request);
+    }
+
+    public function show(Request $request, $id)
+    {
+        return parent::show($request, $id);
+    }
+
+    public function update(Request $request, $id)
+    {
+        return parent::update($request, $id);
+    }
+
+    public function destroy($id)
+    {
+        return parent::destroy($id);
+    }
 }

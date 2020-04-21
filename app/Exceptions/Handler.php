@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -62,9 +63,23 @@ class Handler extends ExceptionHandler
     {
         switch (get_class($exception)) {
             case \Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class:
-                return $this->respondWithNotFound();
+                return $this->respondWithNotFound($exception, 2, 'The requested resource was not found');
+            
+            case \Spatie\QueryBuilder\Exceptions\InvalidAppendQuery::class:
+            case \Spatie\QueryBuilder\Exceptions\InvalidFieldQuery::class:
+            case \Spatie\QueryBuilder\Exceptions\InvalidFilterQuery::class:
+            case \Spatie\QueryBuilder\Exceptions\InvalidIncludeQuery::class:
+            case \Spatie\QueryBuilder\Exceptions\InvalidSortQuery::class:
+            case \Spatie\QueryBuilder\Exceptions\UnknownIncludedFieldsQuery::class:
+                return $this->respondWithError($exception, 3, $exception->getMessage(), $exception->getStatusCode());
+            case \Spatie\QueryBuilder\Exceptions\InvalidDirection::class:
+            case \Spatie\QueryBuilder\Exceptions\InvalidFilterValue::class:
+                return $this->respondWithBadRequest($exception, 3, $exception->getMessage());
         }
+        
+        if ($exception instanceof HttpException)
+            return $this->respondWithError($exception, 4, 'Http exception: '.$exception->getMessage(), $exception->getStatusCode());
 
-        return $this->respondWithError(1, 'An unexpected error occurred');
+        return $this->respondWithError($exception, 1, 'An unexpected error occurred');
     }
 }
