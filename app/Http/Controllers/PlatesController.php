@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plates;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
-use Spatie\QueryBuilder\QueryBuilder;
 
 class PlatesController extends Controller
 {

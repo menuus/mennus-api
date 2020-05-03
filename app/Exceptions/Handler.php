@@ -5,7 +5,6 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Google\Cloud\ErrorReporting\Bootstrap;
 use Illuminate\Support\Facades\Log;
 
 class Handler extends ExceptionHandler
@@ -95,17 +94,21 @@ class Handler extends ExceptionHandler
             case \Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class:
                 return $this->respondWithNotFound($exception, 2, 'The requested resource was not found');
             
-            case \Spatie\QueryBuilder\Exceptions\InvalidAppendQuery::class:
-            case \Spatie\QueryBuilder\Exceptions\InvalidFieldQuery::class:
-            case \Spatie\QueryBuilder\Exceptions\InvalidFilterQuery::class:
-            case \Spatie\QueryBuilder\Exceptions\InvalidIncludeQuery::class:
-            case \Spatie\QueryBuilder\Exceptions\InvalidSortQuery::class:
-            case \Spatie\QueryBuilder\Exceptions\UnknownIncludedFieldsQuery::class:
-                return $this->respondWithError($exception, 3, $exception->getMessage(), $exception->getStatusCode());
+            // Replaced by the "instanceof Invalid Query"
+            // case \Spatie\QueryBuilder\Exceptions\InvalidAppendQuery::class:
+            // case \Spatie\QueryBuilder\Exceptions\InvalidFieldQuery::class:
+            // case \Spatie\QueryBuilder\Exceptions\InvalidFilterQuery::class:
+            // case \Spatie\QueryBuilder\Exceptions\InvalidIncludeQuery::class:
+            // case \Spatie\QueryBuilder\Exceptions\InvalidSortQuery::class:
+            // case \Spatie\QueryBuilder\Exceptions\UnknownIncludedFieldsQuery::class:
+            //     return $this->respondWithError($exception, 3, $exception->getMessage(), $exception->getStatusCode());
             case \Spatie\QueryBuilder\Exceptions\InvalidDirection::class:
             case \Spatie\QueryBuilder\Exceptions\InvalidFilterValue::class:
                 return $this->respondWithBadRequest($exception, 3, $exception->getMessage());
         }
+
+        if ($exception instanceof \Spatie\QueryBuilder\Exceptions\InvalidQuery)
+            return $this->respondWithError($exception, 3, "Invalid query exception: " . $exception->getMessage(), $exception->getStatusCode());
         
         if ($exception instanceof HttpException)
             return $this->respondWithError($exception, 4, 'Http exception: '.$exception->getMessage(), $exception->getStatusCode());

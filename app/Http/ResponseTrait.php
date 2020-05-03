@@ -92,9 +92,12 @@ trait ResponseTrait
         
         if (config('app.debug')) {
             $error['debug_exception'] = [
+                'class' => get_class($exception),
                 'code' => $exception->getCode(),
                 'message' => $exception->getMessage(),
-                'stack_trace' => $exception->getTraceAsString()
+                'file' => $exception->getFile(),
+                'line' => $exception->getLine(),
+                'stack_trace' => str_replace("\n", ' -- ', $exception->getTraceAsString()),
             ];
         }
         
