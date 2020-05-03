@@ -5,6 +5,8 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Google\Cloud\ErrorReporting\Bootstrap;
+use Illuminate\Support\Facades\Log;
 
 class Handler extends ExceptionHandler
 {
@@ -39,7 +41,35 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $exception)
     {
-        parent::report($exception);
+        if ($this->shouldntReport($exception))
+            return;
+
+        if (is_callable($reportCallable = [$exception, 'report'])) {
+            $this->container->call($reportCallable);
+
+            return;
+        }
+
+        $fmtError = $this->formatError($exception);
+
+        // Is running in google cloud?
+        if (isset($_SERVER['GAE_SERVICE'])) {
+            Log::alert("Unhandled exception -- $fmtError -- Stack trace: -- ".$exception->getTraceAsString());
+        } else {
+            Log::alert("Unhandled exception -- $fmtError");
+
+            Log::channel('unhandled--stacktrace-daily')
+                ->alert("Unhandled exception -- $fmtError\nStack trace:\n".$exception->getTraceAsString()."\n\n");
+        }
+    }
+
+    public function formatError(Throwable $exception)
+    {
+        return get_class($exception) . '['
+            . $exception->getCode() . ']:"'
+            . $exception->getMessage() . '" in '
+            . $exception->getFile() . ':'
+            . $exception->getLine();
     }
 
     /**

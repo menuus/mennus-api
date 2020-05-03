@@ -1,10 +1,25 @@
 runtime: php73
 
+runtime_config:
+      enable_stackdriver_integration: true
+
 env_variables:
-   APP_ENV: production
-   APP_DEBUG: false
-   APP_STORAGE: /tmp
-   VIEW_COMPILED_PATH: /tmp
-   DB_HOST: /cloudsql/CLOUDSQL_CONNECTION_NAME
-   DB_USERNAME: 
-   DB_PASSWORD: 
+    APP_NAME: Mennus
+    APP_ENV: production
+    APP_KEY: base64:/sHUAqMvxrl0SYhA+uy/jv7zxwu8H4/bVtQEK2wz1Tc=
+    APP_DEBUG: false
+
+    APP_LOG: errorlog
+    APP_LOG_LEVEL: debug
+    LOG_CHANNEL: 'stackdriver'
+    
+    DB_CONNECTION: pgsql    
+    DB_HOST: /cloudsql/mennus-api:southamerica-east1:mennus
+    DB_DATABASE: mennus
+    DB_USERNAME: 
+    DB_PASSWORD: 
+
+    CACHE_DRIVER: database
+    SESSION_DRIVER: database
+    APP_STORAGE: /tmp
+    VIEW_COMPILED_PATH: /tmp

@@ -37,7 +37,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single', 'stderr'],
             'ignore_exceptions' => false,
         ],
 
@@ -98,6 +98,18 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
+        ],
+
+        'stackdriver' => [
+            'driver' => 'custom',
+            'via' => App\Logging\CreateStackdriverLogger::class,
+        ],
+
+        'unhandled--stacktrace-daily' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/stacktrace/laravel.log'),
+            'level' => 'debug',
+            'days' => 14,
         ],
     ],
 
