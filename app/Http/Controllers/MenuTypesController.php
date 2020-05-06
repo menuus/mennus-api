@@ -2,26 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Plates;
+use App\Models\MenuTypes;
 use Illuminate\Http\Request;
 
-class PlatesController extends Controller
+class MenuTypesController extends Controller
 {
-    protected $defaultSort = '-created_at';
+    protected $defaultSort = 'id';
 
-    // protected $allowedFields = [
-    //     'id',
-    //     'name',
-    //     'slug',
-    //     'description',
-    //     'created_at',
-    //     'updated_at',
-    // ];
-    
     protected $allowedFilters = [
         'name',
         'slug',
         'description',
+        'color',
     ];
 
     protected $allowedSorts = [
@@ -31,15 +23,11 @@ class PlatesController extends Controller
         'id',
     ];
 
-    protected $allowedIncludes = [
-        'establishment',
-        'menu_type',
-        'images',
-    ];
+    protected $allowedIncludes = [];
 
-    public function __construct()
+    function __construct()
     {
-        parent::__construct(Plates::class);
+        parent::__construct(MenuTypes::class);
     }
 
     public function index()
@@ -49,7 +37,11 @@ class PlatesController extends Controller
 
     public function store(Request $request)
     {
-        return parent::store($request);
+        // Converting hex color to decimal value
+        $params = $request->has('color') && ctype_xdigit($request->get('color'))
+            ? array_merge($request->all(), [ 'color' => hexdec($request->get('color')) ])
+            : $request->all();
+        return $this->respondWithStoredData(MenuTypes::create($params));
     }
 
     public function show(Request $request, $id)
