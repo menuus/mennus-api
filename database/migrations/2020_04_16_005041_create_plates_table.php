@@ -15,6 +15,7 @@ class CreatePlatesTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->text('description');
+            $table->float('price');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->softDeletes();

@@ -78,11 +78,6 @@ class CreateMenuTypesTable extends Migration
      */
     public function down()
     {
-        Schema::table('plates', function (Blueprint $table) {
-            $table->dropForeign(['menu_type_id']);
-            $table->dropColumn('menu_type_id');
-        });
-
         Schema::dropIfExists('menu_types');
     }
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Plates extends BaseModel
 {
-    protected $fillable = ['name', 'description', 'slug'];
+    protected $fillable = ['name', 'description', 'slug', 'price'];
 
     public function establishment()
     {

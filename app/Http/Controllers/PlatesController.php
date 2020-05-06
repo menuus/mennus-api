@@ -29,6 +29,7 @@ class PlatesController extends Controller
         'created_at',
         'name',
         'id',
+        'price',
     ];
 
     protected $allowedIncludes = [
