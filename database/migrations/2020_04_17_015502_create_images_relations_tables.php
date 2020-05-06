@@ -13,8 +13,6 @@ class CreateImagesRelationsTables extends Migration
 
             $table->primary([$nameId, 'image_id']);
 
-            //TODO: add resource, ou add no model a lista de imagens????
-            //TODO: fazer factory e seeder das imagens
             $table->foreign($nameId)->references('id')->on($tableName)->onDelete('cascade');
             $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
         });
