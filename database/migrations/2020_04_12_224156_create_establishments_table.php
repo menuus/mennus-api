@@ -11,6 +11,7 @@ class CreateEstablishmentsTable extends Migration
         Schema::create('establishments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('food_court_id');
+            $table->unsignedBigInteger('establishment_category_id');
             $table->string('name');
             $table->string('slug');
             $table->text('description');
@@ -19,6 +20,7 @@ class CreateEstablishmentsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('food_court_id')->references('id')->on('food_courts');
+            $table->foreign('establishment_category_id')->references('id')->on('establishment_categories');
         });
     }
 

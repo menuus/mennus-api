@@ -25,6 +25,7 @@ class EstablishmentsController extends Controller
 
     protected $allowedIncludes = [
         'food_court',
+        'establishment_category',
         'images',
         'plates',
     ];

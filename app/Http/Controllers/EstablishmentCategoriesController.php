@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PlateCategories;
+use App\Models\EstablishmentCategories;
 use Illuminate\Http\Request;
 
-class PlateCategoriesController extends Controller
+class EstablishmentCategoriesController extends Controller
 {
     protected $defaultSort = 'id';
 
@@ -25,7 +25,7 @@ class PlateCategoriesController extends Controller
 
     function __construct()
     {
-        parent::__construct(PlateCategories::class);
+        parent::__construct(EstablishmentCategories::class);
     }
 
     public function index()

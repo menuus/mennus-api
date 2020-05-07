@@ -4,7 +4,7 @@ namespace App\Models;
 
 class PlateCategories extends BaseModel
 {
-    protected $fillable = ['name', 'slug', 'description'];
+    protected $fillable = ['name', 'slug'];
 
     public function plates()
     {

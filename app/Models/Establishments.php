@@ -11,6 +11,11 @@ class Establishments extends BaseModel
         return $this->belongsTo(FoodCourts::class, 'food_court_id');
     }
 
+    public function establishmentCategory()
+    {
+        return $this->belongsTo(EstablishmentCategories::class, 'establishment_category_id');
+    }
+
     public function plates()
     {
         return $this->hasMany(Plates::class, 'establishment_id');
