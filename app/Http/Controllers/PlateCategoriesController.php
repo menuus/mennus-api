@@ -2,26 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Plates;
+use App\Models\PlateCategories;
 use Illuminate\Http\Request;
 
-class PlatesController extends Controller
+class PlateCategoriesController extends Controller
 {
-    protected $defaultSort = '-created_at';
+    protected $defaultSort = 'id';
 
-    // protected $allowedFields = [
-    //     'id',
-    //     'name',
-    //     'slug',
-    //     'description',
-    //     'created_at',
-    //     'updated_at',
-    // ];
-    
     protected $allowedFilters = [
         'name',
         'slug',
-        'description',
     ];
 
     protected $allowedSorts = [
@@ -29,19 +19,13 @@ class PlatesController extends Controller
         'created_at',
         'name',
         'id',
-        'price',
     ];
 
-    protected $allowedIncludes = [
-        'establishment',
-        'menu_type',
-        'plate_category',
-        'images',
-    ];
+    protected $allowedIncludes = [];
 
-    public function __construct()
+    function __construct()
     {
-        parent::__construct(Plates::class);
+        parent::__construct(PlateCategories::class);
     }
 
     public function index()
