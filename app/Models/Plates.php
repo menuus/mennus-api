@@ -11,6 +11,11 @@ class Plates extends BaseModel
         return $this->belongsTo(Establishments::class);
     }
 
+    public function plateCategory()
+    {
+        return $this->belongsTo(PlateCategories::class, 'plate_category_id');
+    }
+
     public function menuType()
     {
         return $this->belongsTo(MenuTypes::class, 'menu_type_id');

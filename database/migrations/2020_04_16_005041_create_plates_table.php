@@ -12,6 +12,7 @@ class CreatePlatesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('establishment_id');
             $table->unsignedBigInteger('menu_type_id');
+            $table->unsignedBigInteger('plate_category_id');
             $table->string('name');
             $table->string('slug');
             $table->text('description');
@@ -22,6 +23,7 @@ class CreatePlatesTable extends Migration
 
             $table->foreign('establishment_id')->references('id')->on('establishments');
             $table->foreign('menu_type_id')->references('id')->on('menu_types');
+            $table->foreign('plate_category_id')->references('id')->on('plate_categories');
         });
     }
 
