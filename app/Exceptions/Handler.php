@@ -90,6 +90,7 @@ class Handler extends ExceptionHandler
 
     public function analyseApiError(Throwable $exception)
     {
+        //TODO: tratar BadMethodCallException - getAditionalfieldAttribute()
         switch (get_class($exception)) {
             case \Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class:
                 return $this->respondWithNotFound($exception, 2, 'The requested resource was not found');
