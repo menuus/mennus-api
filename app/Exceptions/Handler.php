@@ -109,11 +109,13 @@ class Handler extends ExceptionHandler
                 return $this->respondWithBadRequest($exception, ErrorCode::QueryBuilder, $exception->getMessage());
         }
 
+        // TODO: ver \Symfony\Component\ErrorHandler\Error\FatalError (quando nao reconhece a classe e precisa executar um composer dumpautoload)
+
         if ($exception instanceof \Spatie\QueryBuilder\Exceptions\InvalidQuery)
             return $this->respondWithError($exception, ErrorCode::QueryBuilder, "Invalid query exception: " . $exception->getMessage(), $exception->getStatusCode());
 
         if ($exception instanceof \App\Exceptions\MennusNotImplemented) {
-            Log::critical('A not implemented excepetion as raised.');
+            Log::critical('A not implemented excepetion as raised: '.$exception->getMessage());
             return $this->respondWithError($exception, ErrorCode::MennusException, $exception->getMessage(), $exception->getStatusCode());
         }
             

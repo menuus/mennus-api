@@ -13,9 +13,9 @@ class CreateImagesTable extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->string('path');
+            $table->string('local_path')->nullable()->comment('Local storage path (when is not a external image)');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
-            $table->softDeletes();
         });
     }
 

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-class Images extends BaseModel
+class Images extends BaseModel_withoutSoftDeletes
 {
-    protected $fillable = ['name', 'description', 'path'];
+    protected $fillable = ['name', 'description', 'path', 'local_path'];
+    protected $hidden = ['pivot', 'local_path'];
 
     public function foodCourts()
     {
