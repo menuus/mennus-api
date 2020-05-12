@@ -82,6 +82,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        //TODO: sempre retornar json se for uma requisição para /api
         if ($request->wantsJson())
             return $this->analyseApiError($exception);
 
@@ -93,7 +94,8 @@ class Handler extends ExceptionHandler
         //TODO: tratar BadMethodCallException - getAditionalfieldAttribute()
         switch (get_class($exception)) {
             case \Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class:
-                return $this->respondWithNotFound($exception, 2, 'The requested resource was not found');
+            case \Illuminate\Database\Eloquent\ModelNotFoundException::class:
+                return $this->respondWithNotFound($exception, ErrorCode::ResourceNotFound, 'The requested resource was not found');
             
             // Replaced by the "instanceof Invalid Query"
             // case \Spatie\QueryBuilder\Exceptions\InvalidAppendQuery::class:
@@ -105,15 +107,28 @@ class Handler extends ExceptionHandler
             //     return $this->respondWithError($exception, 3, $exception->getMessage(), $exception->getStatusCode());
             case \Spatie\QueryBuilder\Exceptions\InvalidDirection::class:
             case \Spatie\QueryBuilder\Exceptions\InvalidFilterValue::class:
-                return $this->respondWithBadRequest($exception, 3, $exception->getMessage());
+                return $this->respondWithBadRequest($exception, ErrorCode::QueryBuilder, $exception->getMessage());
         }
 
+        // TODO: ver \Symfony\Component\ErrorHandler\Error\FatalError (quando nao reconhece a classe e precisa executar um composer dumpautoload)
+
         if ($exception instanceof \Spatie\QueryBuilder\Exceptions\InvalidQuery)
-            return $this->respondWithError($exception, 3, "Invalid query exception: " . $exception->getMessage(), $exception->getStatusCode());
+            return $this->respondWithError($exception, ErrorCode::QueryBuilder, "Invalid query exception: " . $exception->getMessage(), $exception->getStatusCode());
+
+        if ($exception instanceof \App\Exceptions\MennusNotImplemented) {
+            Log::critical('A not implemented excepetion as raised: '.$exception->getMessage());
+            return $this->respondWithError($exception, ErrorCode::MennusException, $exception->getMessage(), $exception->getStatusCode());
+        }
+            
+        if ($exception instanceof \App\Exceptions\MennusException) {
+            Log::critical('A mennus exception as raised.');
+            return $this->respondWithError($exception, ErrorCode::MennusException, $exception->getMessage(), $exception->getStatusCode());
+        }
+
         
         if ($exception instanceof HttpException)
-            return $this->respondWithError($exception, 4, 'Http exception: '.$exception->getMessage(), $exception->getStatusCode());
+            return $this->respondWithError($exception, ErrorCode::HttpException, 'Http exception: '.$exception->getMessage(), $exception->getStatusCode());
 
-        return $this->respondWithError($exception, 1, 'An unexpected error occurred');
+        return $this->respondWithError($exception, ErrorCode::Unknown, 'An unexpected error occurred');
     }
 }

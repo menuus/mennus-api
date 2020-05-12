@@ -24,3 +24,4 @@ Route::apiResource('plates', 'PlatesController');
 Route::apiResource('menu_types', 'MenuTypesController'); //TODO: add to welcome page
 Route::apiResource('plate_categories', 'PlateCategoriesController'); //TODO: add to welcome page
 Route::apiResource('establishment_categories', 'EstablishmentCategoriesController'); //TODO: add to welcome page
+Route::apiResource('images', 'ImagesController');

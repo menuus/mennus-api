@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
+    'cloud' => env('FILESYSTEM_CLOUD', 'gcs'),
 
     /*
     |--------------------------------------------------------------------------
@@ -62,6 +62,26 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'endpoint' => env('AWS_URL'),
+        ],
+
+        'gcs' => [
+            'driver' => 'gcs',
+            'project_id' => env('GOOGLE_CLOUD_PROJECT_ID', 'mennus-api'),
+            'key_file' => [
+                'type' => env('GOOGLE_CLOUD_ACCOUNT_TYPE', 'service_account'),
+                'private_key_id' => env('GOOGLE_CLOUD_PRIVATE_KEY_ID'),
+                'private_key' => env('GOOGLE_CLOUD_PRIVATE_KEY'),
+                'client_email' => env('GOOGLE_CLOUD_CLIENT_EMAIL'),
+                'client_id' => env('GOOGLE_CLOUD_CLIENT_ID'),
+                'auth_uri' => env('GOOGLE_CLOUD_AUTH_URI', 'https://accounts.google.com/o/oauth2/auth'),
+                'token_uri' => env('GOOGLE_CLOUD_TOKEN_URI', 'https://oauth2.googleapis.com/token'),
+                'auth_provider_x509_cert_url' => env('GOOGLE_CLOUD_AUTH_PROVIDER_CERT_URL', 'https://www.googleapis.com/oauth2/v1/certs'),
+                'client_x509_cert_url' => env('GOOGLE_CLOUD_CLIENT_CERT_URL'),
+            ],
+            'bucket' => env('GOOGLE_CLOUD_STORAGE_BUCKET', 'mennus-images'),
+            'path_prefix' => env('GOOGLE_CLOUD_STORAGE_PATH_PREFIX', null), // optional: /default/path/to/apply/in/bucket
+            'storage_api_uri' => env('GOOGLE_CLOUD_STORAGE_API_URI', null), // see: Public URLs below
+            'visibility' => 'public', // optional: public|private
         ],
 
     ],

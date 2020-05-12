@@ -17,7 +17,8 @@
         "jzonta/faker-restaurant": "^1.1",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
-        "spatie/laravel-query-builder": "^2.8"
+        "spatie/laravel-query-builder": "^2.8",
+        "superbalist/laravel-google-cloud-storage": "^2.2"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
