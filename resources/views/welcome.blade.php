@@ -91,6 +91,9 @@
                 <a href ="api/food_courts">food_courts</a>
                 <a href ="api/establishments">establishments</a>
                 <a href ="api/plates">plates</a>
+                <a href ="api/menu_types">menu_types</a>
+                <a href ="api/plate_categories">plate_categories</a>
+                <a href ="api/establishment_categories">establishment_categories</a>
                 <a href ="api/images">images</a>
             </div>
         </div>
