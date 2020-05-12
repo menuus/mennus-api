@@ -4,22 +4,37 @@ runtime_config:
       enable_stackdriver_integration: true
 
 env_variables:
-    APP_NAME: Mennus
-    APP_ENV: production
-    APP_KEY: base64:/sHUAqMvxrl0SYhA+uy/jv7zxwu8H4/bVtQEK2wz1Tc=
-    APP_DEBUG: false
+      APP_NAME: Mennus
+      APP_ENV: production
+      APP_KEY: base64:/sHUAqMvxrl0SYhA+uy/jv7zxwu8H4/bVtQEK2wz1Tc=
+      APP_DEBUG: false
 
-    APP_LOG: errorlog
-    APP_LOG_LEVEL: debug
-    LOG_CHANNEL: 'stackdriver'
-    
-    DB_CONNECTION: pgsql    
-    DB_HOST: /cloudsql/mennus-api:southamerica-east1:mennus
-    DB_DATABASE: mennus
-    DB_USERNAME: 
-    DB_PASSWORD: 
+      APP_LOG: errorlog
+      APP_LOG_LEVEL: debug
+      LOG_CHANNEL: 'stackdriver'
 
-    CACHE_DRIVER: database
-    SESSION_DRIVER: database
-    APP_STORAGE: /tmp
-    VIEW_COMPILED_PATH: /tmp
+      DB_CONNECTION: pgsql    
+      DB_HOST: /cloudsql/mennus-api:southamerica-east1:mennus
+      DB_DATABASE: mennus
+      DB_USERNAME: 
+      DB_PASSWORD: 
+
+      CACHE_DRIVER: database
+      SESSION_DRIVER: database
+      APP_STORAGE: /tmp
+      VIEW_COMPILED_PATH: /tmp
+
+      # Google Cloud Storage
+      FILESYSTEM_CLOUD: gcs
+      GOOGLE_CLOUD_PROJECT_ID: mennus-api
+      GOOGLE_CLOUD_STORAGE_BUCKET: mennus-images
+      GOOGLE_CLOUD_ACCOUNT_TYPE: type #default: service_account
+      GOOGLE_CLOUD_PRIVATE_KEY_ID: private_key_id
+      GOOGLE_CLOUD_PRIVATE_KEY: "private_key"
+      GOOGLE_CLOUD_CLIENT_EMAIL: client_email
+      GOOGLE_CLOUD_CLIENT_ID: client_id
+      GOOGLE_CLOUD_AUTH_URI: auth_uri #default https://accounts.google.com/o/oauth2/auth
+      GOOGLE_CLOUD_TOKEN_URI: token_uri #default https://oauth2.googleapis.com/token
+      GOOGLE_CLOUD_AUTH_PROVIDER_CERT_URL: auth_provider_x509_cert_url #default> https://www.googleapis.com/oauth2/v1/certs
+      GOOGLE_CLOUD_CLIENT_CERT_URL: client_x509_cert_url
+      GOOGLE_CLOUD_DEFAULT_URL: https://storage.googleapis.com/mennus-images
