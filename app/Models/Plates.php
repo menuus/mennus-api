@@ -25,4 +25,10 @@ class Plates extends BaseModel
     {
         return $this->belongsToMany(Images::class, 'plates_has_images', 'plate_id', 'image_id');
     }
+
+    public function tags()
+    {
+        //TODO: convert to array
+        return $this->belongsToMany(Tags::class, 'plates_has_tags', 'plate_id', 'tag_id');
+    }
 }

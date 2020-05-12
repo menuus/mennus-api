@@ -37,6 +37,7 @@ class PlatesController extends Controller
         'menu_type',
         'plate_category',
         'images',
+        'tags',
     ];
 
     public function __construct()
