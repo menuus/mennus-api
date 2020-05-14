@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EstablishmentCategories;
 use Illuminate\Http\Request;
 
-class EstablishmentCategoriesController extends Controller
+class EstablishmentCategoriesController extends ResourceBaseController_CRUD
 {
     protected $defaultSort = 'id';
 

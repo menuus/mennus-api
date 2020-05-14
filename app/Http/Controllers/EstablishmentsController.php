@@ -6,7 +6,7 @@ use App\Models\Establishments;
 use Illuminate\Http\Request;
 
 
-class EstablishmentsController extends Controller
+class EstablishmentsController extends ResourceBaseController_CRUD
 {
     protected $defaultSort = '-created_at';
 

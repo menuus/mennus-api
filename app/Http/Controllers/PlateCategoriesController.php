@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PlateCategories;
 use Illuminate\Http\Request;
 
-class PlateCategoriesController extends Controller
+class PlateCategoriesController extends ResourceBaseController_CRUD
 {
     protected $defaultSort = 'id';
 

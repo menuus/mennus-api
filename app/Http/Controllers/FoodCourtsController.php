@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FoodCourts;
 use Illuminate\Http\Request;
 
-class FoodCourtsController extends Controller
+class FoodCourtsController extends ResourceBaseController_CRUD
 {
     protected $defaultSort = '-created_at';
 

@@ -69,7 +69,17 @@ trait ResponseTrait
     }
 
     /**
-     * Return with 404 error
+     * Return with 401 error
+     *
+     * @return JsonResponse
+     */
+    protected function respondWithUnauthorized($exception, $code, $msg = 'Unauthorized'): JsonResponse
+    {
+        return $this->respondWithError($exception, $code, $msg, Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * Return with 400 error
      *
      * @return JsonResponse
      */

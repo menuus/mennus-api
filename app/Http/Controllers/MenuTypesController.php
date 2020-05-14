@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MenuTypes;
 use Illuminate\Http\Request;
 
-class MenuTypesController extends Controller
+class MenuTypesController extends ResourceBaseController_CRUD
 {
     protected $defaultSort = 'id';
 
