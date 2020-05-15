@@ -25,3 +25,12 @@ Route::apiResource('menu_types', 'MenuTypesController');
 Route::apiResource('plate_categories', 'PlateCategoriesController');
 Route::apiResource('establishment_categories', 'EstablishmentCategoriesController');
 Route::apiResource('images', 'ImagesController');
+
+Route::post('login', 'UserController@login');
+Route::post('register', 'UserController@register');
+
+Route::get('/unauthorized', 'UserController@unauthorized');
+Route::group(['middleware' => ['CheckClientCredentials', 'auth:api']], function () {
+    Route::post('logout', 'UserController@logout');
+    Route::post('details', 'UserController@details');
+});

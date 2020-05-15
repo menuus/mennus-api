@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use App\Exceptions\MennusBadRequest;
 use App\Exceptions\MennusException;
 use App\Exceptions\MennusNotFound;
-use App\Exceptions\MennusNotImplemented;
+// use App\Exceptions\MennusNotImplemented;
 use App\Models\Images;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Throwable;
 
-class ImagesController extends Controller
+class ImagesController extends ResourceBaseController_JustGets
 {
     protected $defaultSort = '-created_at';
 
@@ -55,6 +55,11 @@ class ImagesController extends Controller
         return parent::index();
     }
 
+    public function show(Request $request, $id)
+    {
+        return parent::show($request, $id);
+    }
+
     public function store(Request $request)
     {
         // A set of validations to request
@@ -91,16 +96,13 @@ class ImagesController extends Controller
         return $this->respondWithStoredData($image);
     }
 
-    public function show(Request $request, $id)
-    {
-        return parent::show($request, $id);
-    }
+    // TODO: test
+    // public function update(Request $request, $id)
+    // {
+    //     throw new MennusNotImplemented("The update image end point was disabled. Please delete the image and create again.");
+    // }
 
-    public function update(Request $request, $id)
-    {
-        throw new MennusNotImplemented("The update image end point was disabled. Please delete the image and create again.");
-    }
-
+    // TODO: re-test
     public function destroy($id)
     {
         $image = $this->ifExists(Images::find($id));
@@ -117,7 +119,9 @@ class ImagesController extends Controller
             Log::warning("An error occurred while trying to delete the image '$image->local_path'");
         }
 
-        return parent::destroy($id);
+        $this->model::destroy($image->id);
+
+        return $this->respondWithNoContent();
     }
 
     // -------------------------------------------------------------------------

@@ -69,7 +69,17 @@ trait ResponseTrait
     }
 
     /**
-     * Return with 404 error
+     * Return with 401 error
+     *
+     * @return JsonResponse
+     */
+    protected function respondWithUnauthorized($exception, $code, $msg = 'Unauthorized'): JsonResponse
+    {
+        return $this->respondWithError($exception, $code, $msg, Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * Return with 400 error
      *
      * @return JsonResponse
      */
@@ -83,12 +93,15 @@ trait ResponseTrait
      *
      * @return JsonResponse
      */
-    protected function respondWithError($exception, $code, $message, $status = Response::HTTP_INTERNAL_SERVER_ERROR): JsonResponse
+    protected function respondWithError($exception, $code, $message, $status = Response::HTTP_INTERNAL_SERVER_ERROR, $extraData = null): JsonResponse
     {
         $error = [
             'code' => $code,
             'message' => $message
         ];
+
+        if (!empty($extraData))
+            $error['info'] = $extraData;
         
         if (config('app.debug')) {
             $error['debug_exception'] = [

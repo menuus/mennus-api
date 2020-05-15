@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Plates;
 use Illuminate\Http\Request;
 
-class PlatesController extends Controller
+class PlatesController extends ResourceBaseController_CRUD
 {
     protected $defaultSort = '-created_at';
 
