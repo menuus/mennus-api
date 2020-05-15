@@ -90,7 +90,7 @@ class Handler extends ExceptionHandler
     }
 
     public function analyseApiError(Throwable $exception)
-    {
+    {//TODO: refatorar
         //TODO: tratar BadMethodCallException - getAditionalfieldAttribute()
         switch (get_class($exception)) {
             case \Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class:
@@ -112,18 +112,23 @@ class Handler extends ExceptionHandler
 
         // TODO: ver \Symfony\Component\ErrorHandler\Error\FatalError (quando nao reconhece a classe e precisa executar um composer dumpautoload)
 
+        
+        if ($exception instanceof MennusValidationError)
+            return $this->respondWithError($exception, ErrorCode::ValidationError, $exception->getMessage(), $exception->getStatusCode(), $exception->getErrors());
+
+        if ($exception instanceof MennusNotImplemented) {
+            Log::critical('A not implemented excepetion as raised: ' . $exception->getMessage());
+            return $this->respondWithError($exception, ErrorCode::MennusException, $exception->getMessage(), $exception->getStatusCode());
+        }
+
+        if ($exception instanceof MennusException)
+            return $this->respondWithError($exception, ErrorCode::MennusException, $exception->getMessage(), $exception->getStatusCode());
+
+        if ($exception instanceof \Illuminate\Auth\AuthenticationException)
+            return $this->respondWithUnauthorized($exception, ErrorCode::Unauthorized, $exception->getMessage());
+
         if ($exception instanceof \Spatie\QueryBuilder\Exceptions\InvalidQuery)
             return $this->respondWithError($exception, ErrorCode::QueryBuilder, "Invalid query exception: " . $exception->getMessage(), $exception->getStatusCode());
-
-        if ($exception instanceof \App\Exceptions\MennusNotImplemented) {
-            Log::critical('A not implemented excepetion as raised: '.$exception->getMessage());
-            return $this->respondWithError($exception, ErrorCode::MennusException, $exception->getMessage(), $exception->getStatusCode());
-        }
-            
-        if ($exception instanceof \App\Exceptions\MennusException) {
-            Log::critical('A mennus exception as raised.');
-            return $this->respondWithError($exception, ErrorCode::MennusException, $exception->getMessage(), $exception->getStatusCode());
-        }
 
         
         if ($exception instanceof HttpException)

@@ -93,12 +93,15 @@ trait ResponseTrait
      *
      * @return JsonResponse
      */
-    protected function respondWithError($exception, $code, $message, $status = Response::HTTP_INTERNAL_SERVER_ERROR): JsonResponse
+    protected function respondWithError($exception, $code, $message, $status = Response::HTTP_INTERNAL_SERVER_ERROR, $extraData = null): JsonResponse
     {
         $error = [
             'code' => $code,
             'message' => $message
         ];
+
+        if (!empty($extraData))
+            $error['info'] = $extraData;
         
         if (config('app.debug')) {
             $error['debug_exception'] = [

@@ -9,4 +9,6 @@ abstract class ErrorCode
     const ResourceNotFound = 3;
     const QueryBuilder = 4;
     const HttpException = 5;
+    const Unauthorized = 6;
+    const ValidationError = 7;
 }
