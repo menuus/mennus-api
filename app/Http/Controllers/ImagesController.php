@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Exceptions\MennusBadRequest;
 use App\Exceptions\MennusException;
 use App\Exceptions\MennusNotFound;
-// use App\Exceptions\MennusNotImplemented;
 use App\Models\Images;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -16,14 +15,15 @@ class ImagesController extends ResourceBaseController_JustGets
 {
     protected $defaultSort = '-created_at';
 
-    protected $allowedFilters = [
-        'name',
-        'description',
-        'path',
-        'food_courts',
-        'establishments',
-        'plates',
-    ];
+    // Calculated in parent
+    // protected $allowedFilters = [
+    //     'name',
+    //     'description',
+    //     'path',
+    //     'food_courts',
+    //     'establishments',
+    //     'plates',
+    // ];
 
     protected $allowedSorts = [
         'updated_at',

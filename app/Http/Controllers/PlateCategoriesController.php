@@ -9,10 +9,7 @@ class PlateCategoriesController extends ResourceBaseController_CRUD
 {
     protected $defaultSort = 'id';
 
-    protected $allowedFilters = [
-        'name',
-        'slug',
-    ];
+    // protected $allowedFilters; // Calculated in parent
 
     protected $allowedSorts = [
         'updated_at',

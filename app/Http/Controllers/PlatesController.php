@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Plates;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class PlatesController extends ResourceBaseController_CRUD
 {
@@ -18,12 +19,8 @@ class PlatesController extends ResourceBaseController_CRUD
     //     'updated_at',
     // ];
     
-    protected $allowedFilters = [
-        'name',
-        'slug',
-        'description',
-    ];
-
+    // protected $allowedFilters; // Calculated in parent
+    
     protected $allowedSorts = [
         'updated_at',
         'created_at',
