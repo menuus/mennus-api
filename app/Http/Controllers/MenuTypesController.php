@@ -9,12 +9,7 @@ class MenuTypesController extends ResourceBaseController_CRUD
 {
     protected $defaultSort = 'id';
 
-    protected $allowedFilters = [
-        'name',
-        'slug',
-        'description',
-        'color',
-    ];
+    // protected $allowedFilters; // Calculated in parent
 
     protected $allowedSorts = [
         'updated_at',

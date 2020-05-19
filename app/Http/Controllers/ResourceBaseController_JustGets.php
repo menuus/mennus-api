@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 abstract class ResourceBaseController_JustGets extends Controller
 {
@@ -33,7 +34,23 @@ abstract class ResourceBaseController_JustGets extends Controller
 
     public function getAllTableColumnsFromModel()
     {
-        return (new $this->model())->getTableColumns();
+        return (new $this->model())->getTableColumnsNames();
+    }
+
+    public function getTableFiltersFromModel()
+    {
+        $filters = [];
+
+        $modelInstance = new $this->model();
+
+        foreach ($modelInstance->getTableColumnsNames() as $columnName)
+            array_push($filters,
+                $modelInstance->getColumnType($columnName) == 'string' ?
+                    AllowedFilter::partial($columnName) :
+                    AllowedFilter::exact($columnName)
+            );
+
+        return $filters;
     }
 
     public function findByFilters(int $userId=null): LengthAwarePaginator
@@ -47,12 +64,14 @@ abstract class ResourceBaseController_JustGets extends Controller
         $model = $userId ? 
             $this->model::where('user_id', $userId) : 
             $this->model;
+        
+        $filters = $this->allowedFilters ?? $this->getTableFiltersFromModel();
 
         //Doc for QueryBuilder: https://github.com/spatie/laravel-query-builder
         return QueryBuilder::for($model)
             // ->select($this->defaultSelect) // Its probably useless
             ->allowedFields($this->allowedFields ?? $allColumns)
-            ->allowedFilters($this->allowedFilters ?? '') //TODO: add filters by int, timestamp, float
+            ->allowedFilters($filters)
             ->allowedIncludes($this->allowedIncludes ?? '')
             ->allowedSorts($this->allowedSorts ?? $allColumns)
             ->defaultSort($this->defaultSort ?? 'id')

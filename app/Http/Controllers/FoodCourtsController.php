@@ -9,11 +9,7 @@ class FoodCourtsController extends ResourceBaseController_CRUD
 {
     protected $defaultSort = '-created_at';
 
-    protected $allowedFilters = [
-        'name',
-        'slug',
-        'description',
-    ];
+    // protected $allowedFilters; // Calculated in parent
 
     protected $allowedSorts = [
         'updated_at',

@@ -9,9 +9,14 @@ class BaseModel_withoutSoftDeletes extends Model
 {
     protected $hidden = ['pivot'];
 
-    public function getTableColumns()
+    public function getTableColumnsNames()
     {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
+    
+    public function getColumnType(string $colName)
+    {
+        return $this->getConnection()->getSchemaBuilder()->getColumnType($this->getTable(), $colName);
     }
 }
 
