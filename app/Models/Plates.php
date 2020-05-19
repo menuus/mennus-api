@@ -25,4 +25,10 @@ class Plates extends BaseModel
     {
         return $this->belongsToMany(Images::class, 'plates_has_images', 'plate_id', 'image_id');
     }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Orders::class, 'orders_has_plates', 'plate_id', 'order_id')
+            ->withPivot('plates_amount', 'price');
+    }
 }

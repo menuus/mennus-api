@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Orders;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -28,4 +29,15 @@ class User extends Authenticatable
     ];
 
     protected $dates = ['deleted_at'];
+    protected $with = ['profile'];
+
+    public function orders()
+    { //TODO: tirar daqui
+        return $this->hasMany(Orders::class, 'user_id');
+    }
+
+    public function profile()
+    {
+        return $this->morphTo();
+    }
 }

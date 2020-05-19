@@ -4,9 +4,9 @@ runtime_config:
       enable_stackdriver_integration: true
 
 handlers:
-    - url: /(.*\.(gif|png|jpg|css|js))$
+    - url: /(.*\.(gif|png|jpg|css|js|svg))$
       static_files: public/\1
-      upload: public/.*\.(gif|png|jpg|css|js)$
+      upload: public/.*\.(gif|png|jpg|css|js|svg)$
 
     - url: /.*
       secure: always
@@ -14,7 +14,7 @@ handlers:
       script: auto
 
 env_variables:
-      APP_NAME: Mennus
+      APP_NAME: Menuus
       APP_ENV: production
       APP_KEY: base64:/sHUAqMvxrl0SYhA+uy/jv7zxwu8H4/bVtQEK2wz1Tc=
       APP_DEBUG: false
@@ -22,6 +22,11 @@ env_variables:
       APP_LOG: errorlog
       APP_LOG_LEVEL: debug
       LOG_CHANNEL: 'stackdriver'
+
+      CACHE_DRIVER: database
+      SESSION_DRIVER: database
+      APP_STORAGE: /tmp
+      VIEW_COMPILED_PATH: /tmp
 
       DB_CONNECTION: pgsql    
       DB_HOST: /cloudsql/mennus-api:southamerica-east1:mennus
@@ -40,7 +45,7 @@ env_variables:
       GOOGLE_CLOUD_STORAGE_BUCKET: mennus-images
       GOOGLE_CLOUD_ACCOUNT_TYPE: type #default: service_account
       GOOGLE_CLOUD_PRIVATE_KEY_ID: private_key_id
-      GOOGLE_CLOUD_PRIVATE_KEY: "private_key"
+      GOOGLE_CLOUD_PRIVATE_KEY: "-----BEGIN RSA PRIVATE KEY-----\n<PRIVATE_KEY_HERE>\n-----END RSA PRIVATE KEY-----"
       GOOGLE_CLOUD_CLIENT_EMAIL: client_email
       GOOGLE_CLOUD_CLIENT_ID: client_id
       GOOGLE_CLOUD_AUTH_URI: auth_uri #default https://accounts.google.com/o/oauth2/auth
@@ -48,3 +53,6 @@ env_variables:
       GOOGLE_CLOUD_AUTH_PROVIDER_CERT_URL: auth_provider_x509_cert_url #default> https://www.googleapis.com/oauth2/v1/certs
       GOOGLE_CLOUD_CLIENT_CERT_URL: client_x509_cert_url
       GOOGLE_CLOUD_DEFAULT_URL: https://storage.googleapis.com/mennus-images
+
+      PASSPORT_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n<PRIVATE_KEY_HERE>\n-----END RSA PRIVATE KEY-----"
+      PASSPORT_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----\n<PUBLIC_KEY_HERE>\n-----END PUBLIC KEY-----"

@@ -25,4 +25,14 @@ class Establishments extends BaseModel
     {
         return $this->belongsToMany(Images::class, 'establishments_has_images', 'establishment_id', 'image_id');
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Orders::class, 'establishment_id');
+    }
+
+    public function profile()
+    {
+        return $this->has(EstablishmentProfile::class, 'establishment_id');
+    }
 }

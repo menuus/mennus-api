@@ -20,3 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/order_delete', 'HomeController@order_delete')->name('order_delete');
+Route::post('/order_call', 'HomeController@order_call')->name('order_call');
+Route::post('/order_finish', 'HomeController@order_finish')->name('order_finish');

@@ -15,8 +15,6 @@ class ImagesSeeder extends Seeder
      */
     public function run()
     {
-        Images::truncate();
-
         $this->createImagesFor(FoodCourts::class, 3, 10, 'business');
         $this->createImagesFor(Establishments::class, 1, 10, 'business');
         $this->createImagesFor(Plates::class, 0, 3, 'food');

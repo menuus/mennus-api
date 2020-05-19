@@ -36,16 +36,20 @@ abstract class ResourceBaseController_JustGets extends Controller
         return (new $this->model())->getTableColumns();
     }
 
-    public function findByFilters(): LengthAwarePaginator
+    public function findByFilters(int $userId=null): LengthAwarePaginator
     {
         $perPage = (int) request()->get('limit');
         $perPage = $perPage >= 1 && $perPage <= 100 ? $perPage : 20;
 
         if (!isset($this->allowedSorts) || !isset($this->allowedFields))
             $allColumns = $this->getAllTableColumnsFromModel();
+        
+        $model = $userId ? 
+            $this->model::where('user_id', $userId) : 
+            $this->model;
 
         //Doc for QueryBuilder: https://github.com/spatie/laravel-query-builder
-        return QueryBuilder::for($this->model)
+        return QueryBuilder::for($model)
             // ->select($this->defaultSelect) // Its probably useless
             ->allowedFields($this->allowedFields ?? $allColumns)
             ->allowedFilters($this->allowedFilters ?? '') //TODO: add filters by int, timestamp, float

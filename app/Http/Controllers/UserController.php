@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\MennusUnauthorized;
 use App\User;
-use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class UserController extends Controller //TODO: extends ResourceBaseController
 {
     protected $successStatus = 200;
 
