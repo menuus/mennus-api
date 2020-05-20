@@ -21,6 +21,6 @@ $factory->define(Plates::class, function (Faker $faker) {
         'plate_category_id' => $faker->randomElement($plateCategoriesIds),
         'description' => $faker->sentence(6),
         'slug' => Str::slug($name, '-'),
-        'price' => $faker->randomFloat(2, 5, 50),
+        'price' => $faker->randomFloat(2, 20, 45),
     ];
 });

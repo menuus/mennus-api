@@ -3,6 +3,7 @@
 use App\Models\CustomerProfiles;
 use App\Models\EstablishmentProfiles;
 use App\Models\Establishments;
+use App\Models\Images;
 use App\User;
 use Illuminate\Database\Seeder;
 
@@ -17,9 +18,33 @@ class UsersSeeder extends Seeder
     {
         User::truncate();
 
-        factory(User::class, 10)->create()->each(function($user) {
-            CustomerProfiles::create()->user()->save($user);
-        });
+        $names = [
+            'Juliana Mendonça',
+            'Gabriele Lima Polalsky',
+            'Katia Bruna Oliveira',
+            'Mary Anne Silveira',
+            'Bruna de Pontes Souza',
+            'Tatiana Furokawa',
+            'Antônio Vieira Cordeiro',
+            'Bruno Limeira',
+        ];
+
+        for ($i=1; $i<=8; $i++)
+        {
+            $user = factory(User::class, 1)->create([
+                'name' => $names[$i-1],
+                'email' => Str::slug($names[$i - 1], '-') . '@email.com',
+            ])[0];
+
+            $image = Images::create([
+                'name' => "Profile do usuário: $user->name",
+                'path' => "https://storage.googleapis.com/mennus-images/mock/avatars/$i.jpg",
+            ]);
+            
+            CustomerProfiles::create([
+                'image_id' => $image->id
+            ])->user()->save($user);
+        }
 
         Establishments::all()->each(function ($establishment) {
             $user = factory(User::class, 1)->create([
@@ -30,11 +55,6 @@ class UsersSeeder extends Seeder
             EstablishmentProfiles::create([
                 'establishment_id' => $establishment->id
             ])->user()->save($user);
-        });
-
-        factory(User::class, 1)->create()->each(function ($user) {
-            $profile = CustomerProfiles::create();
-            $profile->user()->save($user);
         });
     }
 }

@@ -15,7 +15,7 @@ class CreatePlatesTable extends Migration
             $table->unsignedBigInteger('plate_category_id');
             $table->string('name');
             $table->string('slug');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->float('price');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

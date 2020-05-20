@@ -9,6 +9,10 @@ class FoodCourtsSeeder extends Seeder
     {
         FoodCourts::truncate();
 
-        factory(FoodCourts::class, 3)->create();
+        factory(FoodCourts::class, 1)->create([
+            'name' => 'Mercadori',
+            'description' => "A praça de alimentação tecnológica",
+            'slug' => 'mercadori',
+        ]);
     }
 }

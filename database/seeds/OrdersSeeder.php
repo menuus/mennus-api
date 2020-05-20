@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class OrdersSeeder extends Seeder
 {
     private $min = 3;
-    private $max = 15;
+    private $max = 8;
 
     public function run()
     {
@@ -19,9 +19,11 @@ class OrdersSeeder extends Seeder
 
             for ($i=0; $i<$ordersAmount; $i++)
             {
+                $user_id = User::where('profile_type', 'App\Models\CustomerProfiles')
+                    ->inRandomOrder()->first()->id;
                 $order = factory(Orders::class, 1)->create([
                     'establishment_id' => $establishment->id,
-                    'user_id' => User::all()->random()->id,
+                    'user_id' => $user_id,
                 ])->first();
 
                 $plate = $establishment->plates->random();
