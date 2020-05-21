@@ -18,6 +18,7 @@ class OrdersController extends ResourceBaseController_CRUD
     protected $allowedSorts = [
         'updated_at',
         'created_at',
+        'finished_at',
     ];
 
     protected $allowedIncludes = [

@@ -45,6 +45,15 @@ class ImagesSeeder extends Seeder
         {
             $i++;
             $j=0;
+
+            $image = Images::create([
+                'name' => "Logo do estabelecimento: $establishment->name",
+                'path' => "https://storage.googleapis.com/mennus-images/mock/plates/$i/logo.png",
+            ]);
+
+            // $establishment->logo()->save($establishment);
+            $image->establishment_logo()->save($establishment);
+
             foreach ($establishment->plates as $plate) 
             {
                 $j++;

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\CustomerProfiles;
+use App\Models\EstablishmentProfiles;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -53,6 +56,10 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'profile_type' => [
+                'required',
+                Rule::in(['customer', 'establishment']),
+            ],
         ]);
     }
 
@@ -64,10 +71,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        //TODO: add image
+        switch ($data['profile_type']) {
+            case 'customer':
+                CustomerProfiles::create()->user()->save($user);
+                break;
+            
+            case 'establishment':
+                EstablishmentProfiles::create()->user()->save($user);
+                break;
+        }
+
+        return $user;
     }
 }

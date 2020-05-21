@@ -18,7 +18,9 @@ class PlateCategoriesController extends ResourceBaseController_CRUD
         'id',
     ];
 
-    protected $allowedIncludes = [];
+    protected $allowedIncludes = [
+        'plates'
+    ];
 
     function __construct()
     {

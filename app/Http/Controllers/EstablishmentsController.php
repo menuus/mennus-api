@@ -24,6 +24,7 @@ class EstablishmentsController extends ResourceBaseController_CRUD
         'establishment_category',
         'images',
         'plates',
+        'logo',
     ];
 
     function __construct()

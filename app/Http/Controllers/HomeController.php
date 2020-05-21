@@ -48,8 +48,11 @@ class HomeController extends Controller
     public function order_finish(Request $request)
     {
         // TODO: refatorar
+        $order = Orders::find($request->order_id);
+        $order->finished_at = \Carbon\Carbon::now();
+        $order->save();
         return response([
-            'data' => Orders::destroy($request->order_id) //TODO: implements finish order
+            'data' => $order,
         ]);
     }
 }

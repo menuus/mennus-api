@@ -7,6 +7,7 @@ use App\User;
 class Orders extends BaseModel
 {
     protected $fillable = ['obs'];
+    protected $dates = ['finished_at', 'deleted_at'];
 
     public function user()
     {

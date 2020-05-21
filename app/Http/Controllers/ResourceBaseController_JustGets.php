@@ -56,7 +56,7 @@ abstract class ResourceBaseController_JustGets extends Controller
     public function findByFilters(int $userId=null): LengthAwarePaginator
     {
         $perPage = (int) request()->get('limit');
-        $perPage = $perPage >= 1 && $perPage <= 100 ? $perPage : 20;
+        $perPage = $perPage >= 1 && $perPage <= 100 ? $perPage : 50;
 
         if (!isset($this->allowedSorts) || !isset($this->allowedFields))
             $allColumns = $this->getAllTableColumnsFromModel();

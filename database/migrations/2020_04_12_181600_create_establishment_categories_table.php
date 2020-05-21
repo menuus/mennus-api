@@ -30,7 +30,7 @@ class CreateEstablishmentCategoriesTable extends Migration
     {
         $categories = [
             'Bar','Hamburgueria','Pizzaria','Churrascaria','Padaria','Sorveteria',
-            'Japonesa','Italiana','Árabe','Mexicana','Asiática','Vegetariana',
+            'Japonesa','Italiana','Árabe','Mexicana','Asiática','Veggie',
             'Pastelaria','Lanchonete','Chopperia'
         ];
 

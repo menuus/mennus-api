@@ -44,6 +44,27 @@ class PlatesSeeder extends Seeder
         $this->plate("Mucho nacho", "Principal", "Mexicana", "Quesadillas");
         $this->plate("Mucho nacho", "Principal", "Mexicana", "Tacos");
         $this->plate("Mucho nacho", "Principal", "Mexicana", "Taco Veggie");
+        
+        $this->plate("Vinodega", "Vinhos", "Vinho", "Del Rei Colonial");
+        $this->plate("Vinodega", "Vinhos", "Vinho", "Goes Doce Rosado");
+        $this->plate("Vinodega", "Vinhos", "Vinho", "Olaria Tinto Suave");
+        $this->plate("Vinodega", "Vinhos", "Vinho", "Pérgota Branco Suave");
+        $this->plate("Vinodega", "Vinhos", "Vinho", "Aurora Tinto Seco");
+        $this->plate("Vinodega", "Vinhos", "Vinho", "Caipirinha de vinho Tinto");
+        
+        $this->plate("Chopp Suey", "Bebidas", "Cerveja", "Anbier Pilsen");
+        $this->plate("Chopp Suey", "Bebidas", "Cerveja", "Wunder Draft");
+        $this->plate("Chopp Suey", "Bebidas", "Cerveja", "Heineken longneck");
+        $this->plate("Chopp Suey", "Bebidas", "Cerveja", "Stella Artois");
+        $this->plate("Chopp Suey", "Bebidas", "Cerveja", "Budweiser longneck");
+        $this->plate("Chopp Suey", "Bebidas", "Cerveja", "Eisenbahn Pilsen");
+        
+        $this->plate("Fitway Food", "Bebidas", "Suco", "Suco detox");
+        $this->plate("Fitway Food", "Bebidas", "Suco", "Lemonraba");
+        $this->plate("Fitway Food", "Bebidas", "Suco", "Maracuranja");
+        $this->plate("Fitway Food", "Bebidas", "Suco", "Salada caesar");
+        $this->plate("Fitway Food", "Bebidas", "Suco", "Mix de legumes");
+        $this->plate("Fitway Food", "Bebidas", "Suco", "Fitway salad");
     }
 
     public function plate($establishment, $menuType, $category, $name)

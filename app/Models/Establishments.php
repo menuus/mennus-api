@@ -33,6 +33,11 @@ class Establishments extends BaseModel
 
     public function profile()
     {
-        return $this->has(EstablishmentProfile::class, 'establishment_id');
+        return $this->has(EstablishmentProfiles::class, 'establishment_id');
+    }
+
+    public function logo()
+    {
+        return $this->belongsTo(Images::class, 'logo_image_id');
     }
 }

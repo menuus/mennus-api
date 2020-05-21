@@ -10,11 +10,12 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id'); //TODO: change to customer_id
             $table->unsignedBigInteger('establishment_id');
             $table->string('obs')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('finished_at')->nullable();
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');

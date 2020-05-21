@@ -44,5 +44,29 @@ class EstablishmentsSeeder extends Seeder
             'description' => 'Comida mexicana que pra quem está com fome!!',
             'slug' => "mucho-nacho"
         ]);
+
+        factory(Establishments::class, 1)->create([
+            'name' => "Vinodega",
+            'food_court_id' => $foodcourt_id,
+            'establishment_category_id' => EstablishmentCategories::where('name', 'Bar')->first()->id,
+            'description' => 'Os melhores vinhos da região',
+            'slug' => "vinodega"
+        ]);
+
+        factory(Establishments::class, 1)->create([
+            'name' => "Chopp Suey",
+            'food_court_id' => $foodcourt_id,
+            'establishment_category_id' => EstablishmentCategories::where('name', 'Bar')->first()->id,
+            'description' => 'Chopps e cervejas',
+            'slug' => "chopp-suey"
+        ]);
+
+        factory(Establishments::class, 1)->create([
+            'name' => "Fitway Food",
+            'food_court_id' => $foodcourt_id,
+            'establishment_category_id' => EstablishmentCategories::where('name', 'Veggie')->first()->id,
+            'description' => 'Light food',
+            'slug' => "fitway-food"
+        ]);
     }
 }

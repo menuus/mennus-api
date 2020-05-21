@@ -21,4 +21,9 @@ class Images extends BaseModel_withoutSoftDeletes
     {
         return $this->belongsToMany(Plates::class, 'plates_has_images', 'image_id', 'plate_id');
     }
+
+    public function establishment_logo()
+    {
+        return $this->hasOne(Establishments::class, 'logo_image_id');
+    }
 }
