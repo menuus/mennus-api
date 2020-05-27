@@ -82,8 +82,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        //TODO: sempre retornar json se for uma requisição para /api
-        if ($request->wantsJson())
+        if ($request->wantsJson() || substr($request->path(), 0, 3) === "api")
             return $this->analyseApiError($exception);
 
         return parent::render($request, $exception);
