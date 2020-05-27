@@ -6,6 +6,7 @@ use App\Models\Orders;
 use App\Services\NotificationService;
 use Illuminate\Http\Request;
 
+//FIXME: Traduções hardcoded
 class HomeController extends Controller
 {
     /**
