@@ -6,6 +6,7 @@ use App\Models\CustomerProfiles;
 use App\Models\EstablishmentProfiles;
 use App\Models\Orders;
 use Arrilot\Widgets\AbstractWidget;
+use Illuminate\Support\Carbon;
 
 class OrdersTable extends AbstractWidget
 {
@@ -33,11 +34,24 @@ class OrdersTable extends AbstractWidget
         switch (get_class(auth()->user()->profile))
         {
             case CustomerProfiles::class:
+                // Expiration control
+                Orders::where([
+                    ['user_id', '=', auth()->user()->id],
+                    ['created_at', '<=', Carbon::now()->subDay()],
+                ])->delete();
+
                 $orders = Orders::where('user_id', auth()->user()->id)->orderBy('created_at')->get();
                 break;
 
             case EstablishmentProfiles::class:
                 $establishment_id = auth()->user()->profile->establishment_id;
+
+                // Expiration control
+                Orders::where([
+                    ['establishment_id', '=', $establishment_id],
+                    ['created_at', '<=', Carbon::now()->subDay()],
+                ])->delete();
+
                 $orders = Orders::where('establishment_id', $establishment_id)
                     ->where('finished_at', null)
                     ->orderBy('created_at')
@@ -47,7 +61,7 @@ class OrdersTable extends AbstractWidget
 
         return view('widgets.orders_table', [
             'config' => $this->config,
-            'orders' => $orders
+            'orders' => $orders,
         ]);
     }
 }
