@@ -136,5 +136,52 @@
             }
         });
     }
+
+    window.onload = function() {
+        startCounter();
+    };
+
+    function startCounter() {
+        $("tr[id^=order]").each(function() {
+            var createdAt = parseFloat($(this).find('#timestamp').val());
+            var now = Math.floor(Date.now() / 1000);
+            var totalSeconds = now - createdAt;
+
+            var maxTime = 2400; // 40min
+            var pct = Math.floor(Math.min(totalSeconds, maxTime) / maxTime * 100);
+
+            $(this).find('#timeElapsed').text(toHumanTime(totalSeconds));
+            $(this).find('#percentage').text(pct + "%");
+
+            var pBar = $(this).find('#progressbar');
+            pBar.css("width", pct + "%");
+
+            if (pct < 26)
+                pBar.addClass('bg-success');
+            else if (pct < 51)
+                pBar.addClass('bg-info');
+            else if (pct < 76)
+                pBar.addClass('bg-warning');
+            else if (totalSeconds < 3600)
+                pBar.addClass('bg-danger');
+            else
+                pBar.toggleClass('bg-danger');
+        });
+
+        setTimeout('startCounter()', 1000);
+    }
+
+    function toHumanTime(totalSeconds) {
+        var hrs = Math.floor(totalSeconds / 3600);
+        var min = Math.floor((totalSeconds - hrs * 3600) / 60);
+        var sec = totalSeconds - hrs * 3600 - min * 60;
+
+        var humanTime = "";
+        if (hrs > 0) humanTime += hrs + "h ";
+        if (min > 0) humanTime += min + "m ";
+        humanTime += sec + "s"
+
+        return humanTime;
+    }
 </script>
 @endsection
