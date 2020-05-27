@@ -58,10 +58,37 @@ class OrdersTable extends AbstractWidget
                     ->get();
                 break;
         }
+        
+        $percentage = [];
+        $timeElapsed = [];
+        $maxTime = 2400;
+
+        // TODO: refactor
+        foreach ($orders as $order)
+        {
+            $totalSeconds = Carbon::now()->diffInSeconds($order->created_at);
+            $percentage[$order->id] = floor(min($totalSeconds, $maxTime) / $maxTime * 100);
+            $timeElapsed[$order->id] = $this->toHumanTime($totalSeconds);
+        }
 
         return view('widgets.orders_table', [
             'config' => $this->config,
             'orders' => $orders,
+            'percentage' => $percentage,
+            'timeElapsed' => $timeElapsed,
         ]);
+    }
+
+    function toHumanTime($totalSeconds) {
+        $hrs = floor($totalSeconds / 3600);
+        $min = floor(($totalSeconds - $hrs * 3600) / 60);
+        $sec = $totalSeconds - $hrs * 3600 - $min * 60;
+
+        $humanTime = "";
+        if ($hrs > 0) $humanTime .= "${hrs}h ";
+        if ($min > 0) $humanTime .= "${min}m ";
+        $humanTime .= "${sec}s";
+
+        return $humanTime;
     }
 }

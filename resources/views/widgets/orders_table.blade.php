@@ -7,7 +7,7 @@
                 </svg>
             </th>
             <th>Cliente</th>
-            <th class="text-center">Tempo</th>
+            <th class="text-center" width="25%">Tempo</th>
             <th>Pedidos</th>
             <th class="text-center">Ações</th>
         </tr>
@@ -37,8 +37,8 @@
             <td>
                 <input type="hidden" id="timestamp" value="{{$order->created_at->timestamp}}" />
                 <div class="clearfix">
-                    <div class="float-left"><strong><span id='percentage'></span></strong></div>
-                    <div class="float-right"><small class="text-muted">Pedido feito à <strong><span id='timeElapsed'>...</span></strong></small></div>
+                    <div class="float-left"><strong><span id='percentage'>{{$percentage[$order->id]}}%</span></strong></div>
+                    <div class="float-right"><small class="text-muted">Pedido feito à <strong><span id='timeElapsed'>{{$timeElapsed[$order->id]}}</span></strong></small></div>
                 </div>
                 <div class="progress progress-xs">
                     <div class="progress-bar bg-secondary" id="progressbar"></div>
