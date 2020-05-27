@@ -20,6 +20,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     });
     
     Route::apiResource('orders', 'OrdersController');
+    Route::post('/push_token', 'UserController@pushToken');
 });
 
 

@@ -56,3 +56,6 @@ env_variables:
 
       PASSPORT_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n<PRIVATE_KEY_HERE>\n-----END RSA PRIVATE KEY-----"
       PASSPORT_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----\n<PUBLIC_KEY_HERE>\n-----END PUBLIC KEY-----"
+
+      FCM_SERVER_KEY=my_secret_server_key
+      FCM_SENDER_ID=506081427577

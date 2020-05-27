@@ -18,12 +18,12 @@ class UserController extends Controller //TODO: extends ResourceBaseController
     {
         $loginData = $this->validateAndGetInputData($request, [
             'email' => 'required|email|string',
-            'password' => 'required|string'
+            'password' => 'required|string',
         ]);
 
         if (!auth()->attempt($loginData))
             throw new MennusUnauthorized('Invalid credentials');
-
+        
         $accessToken = auth()->user()->createToken('authToken')->accessToken;
 
         return $this->respondWithCustomData(['user' => auth()->user(), 'access_token' => $accessToken]);
@@ -37,6 +37,7 @@ class UserController extends Controller //TODO: extends ResourceBaseController
             'email' => 'email|required|unique:users',
             'password' => 'required|min:8',
             'c_password' => 'required|same:password',
+            'push_token' => 'string|unique:users,push_token',
             'profile_type' => [ 
                 'required', 
                 Rule::in(['customer', 'establishment']),
@@ -64,6 +65,18 @@ class UserController extends Controller //TODO: extends ResourceBaseController
         $accessToken = $user->createToken('authToken')->accessToken;
 
         return $this->respondWithCustomData(['user' => $user, 'access_token' => $accessToken]);
+    }
+
+    public function pushToken(Request $request)
+    {
+        $loginData = $this->validateAndGetInputData($request, [
+            'token' => 'required|string|unique:users,push_token',
+        ]);
+
+        auth()->user()->push_token = $loginData['token'];
+        auth()->user()->save();
+
+        return $this->respondWithCustomData(['user' => auth()->user()]);
     }
 
     public function details()
