@@ -70,7 +70,7 @@ class UserController extends Controller //TODO: extends ResourceBaseController
     public function pushToken(Request $request)
     {
         $loginData = $this->validateAndGetInputData($request, [
-            'token' => 'required|string|unique:users,push_token',
+            'token' => 'required|string', //|unique:users,push_token
         ]);
 
         auth()->user()->push_token = $loginData['token'];
