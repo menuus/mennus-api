@@ -63,6 +63,11 @@ body {
   background-color: #ebedef;
 }
 
+.logo {
+    font-family: $logo-font-family;
+    color: #EF5350;
+}
+
 .c-app {
   color: #3c4b64;
   background-color: #ebedef;
@@ -8820,7 +8825,13 @@ html:not([dir="rtl"]) .nav-tabs-boxed.nav-tabs-boxed-right .nav-item {
       justify-content: space-between;
 }
 
+
+.navbar-default .navbar-brand {
+  color: #d7e2e9;
+}
+
 .navbar-brand {
+  color: #EF5350;
   display: inline-block;
   padding-top: 0.3359375rem;
   padding-bottom: 0.3359375rem;
@@ -9178,12 +9189,12 @@ html:not([dir="rtl"]) .navbar-nav {
 }
 
 .navbar.navbar-dark .navbar-brand {
-  color: #fff;
+  /* color: #fff; */
 }
 
 .navbar.navbar-dark .navbar-brand:hover,
 .navbar.navbar-dark .navbar-brand:focus {
-  color: #fff;
+  /* color: #fff; */
 }
 
 .navbar.navbar-dark .navbar-nav .nav-link {
@@ -9229,12 +9240,12 @@ html:not([dir="rtl"]) .navbar-nav {
 }
 
 .navbar.navbar-light .navbar-brand {
-  color: rgba(0, 0, 21, 0.9);
+  /* color: rgba(0, 0, 21, 0.9); */
 }
 
 .navbar.navbar-light .navbar-brand:hover,
 .navbar.navbar-light .navbar-brand:focus {
-  color: rgba(0, 0, 21, 0.9);
+  /* color: rgba(0, 0, 21, 0.9); */
 }
 
 .navbar.navbar-light .navbar-nav .nav-link {

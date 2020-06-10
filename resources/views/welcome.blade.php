@@ -9,6 +9,11 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Pacifico:400,300' rel='stylesheet'>
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <!-- Styles -->
     <style>
@@ -83,18 +88,18 @@
         @endif
 
         <div class="content">
-            <div class="title m-b-md">
-                menuus
+            <div class="title m-b-md logo">
+                Menuus
             </div>
 
             <div class="links">
-                <a href ="api/food_courts">food_courts</a>
-                <a href ="api/establishments">establishments</a>
-                <a href ="api/plates">plates</a>
-                <a href ="api/menu_types">menu_types</a>
-                <a href ="api/plate_categories">plate_categories</a>
-                <a href ="api/establishment_categories">establishment_categories</a>
-                <a href ="api/images">images</a>
+                <a href="api/food_courts">food_courts</a>
+                <a href="api/establishments">establishments</a>
+                <a href="api/plates">plates</a>
+                <a href="api/menu_types">menu_types</a>
+                <a href="api/plate_categories">plate_categories</a>
+                <a href="api/establishment_categories">establishment_categories</a>
+                <a href="api/images">images</a>
             </div>
         </div>
     </div>
