@@ -73,7 +73,7 @@
         </tr>
         @empty
         <tr>
-            <td class="text-center" colspan="4">Sem pedidos</td>
+            <td class="text-center" colspan="5">Sem pedidos</td>
         </tr>
         @endforelse
     </tbody>
