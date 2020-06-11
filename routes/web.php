@@ -21,6 +21,10 @@ Route::get('/api', function () {
     return view('endpoints');
 });
 
+Route::get('/theproject', function () {
+    return view('theproject');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

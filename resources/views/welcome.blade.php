@@ -81,6 +81,7 @@
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
         <div class="top-right links">
+            <a href="{{ url('/theproject') }}">O Projeto</a>
             @auth
             <a href="{{ url('/home') }}">Página inicial</a>
             @else
@@ -99,7 +100,7 @@
             </div>
 
             <div class="subtitle">
-                Uma solução efetiva para divulgar pratos numa praça de alimentação
+                Uma solução efetiva para divulgar pratos em uma praça de alimentação
             </div>
 
             <!-- <div class=" links">
