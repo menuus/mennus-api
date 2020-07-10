@@ -9,7 +9,7 @@ use Spatie\QueryBuilder\AllowedFilter;
 
 abstract class ResourceBaseController_JustGets extends Controller
 {
-    private $model;
+    protected $model;
 
     // protected $defaultSort = '';
     // protected $allowedFields = [];

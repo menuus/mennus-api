@@ -48,7 +48,7 @@ class ImagesSeeder extends Seeder
 
             $image = Images::create([
                 'name' => "Logo do estabelecimento: $establishment->name",
-                'path' => "https://storage.googleapis.com/mennus-images/mock/plates/$i/logo.png",
+                'path' => "https://storage.googleapis.com/menuus-images/mock/plates/$i/logo.png",
             ]);
 
             // $establishment->logo()->save($establishment);
@@ -60,7 +60,7 @@ class ImagesSeeder extends Seeder
 
                 $image = Images::create([
                     'name' => "Imagem do prato: $plate->name",
-                    'path' => "https://storage.googleapis.com/mennus-images/mock/plates/$i/$j.jpg",
+                    'path' => "https://storage.googleapis.com/menuus-images/mock/plates/$i/$j.jpg",
                 ]);
 
                 $plate->images()->save($image);

@@ -29,8 +29,8 @@ env_variables:
       VIEW_COMPILED_PATH: /tmp
 
       DB_CONNECTION: pgsql    
-      DB_HOST: /cloudsql/mennus-api:southamerica-east1:mennus
-      DB_DATABASE: mennus
+      DB_HOST: /cloudsql/menuus:southamerica-east1:menuus
+      DB_DATABASE: menuus
       DB_USERNAME: 
       DB_PASSWORD: 
 
@@ -41,8 +41,8 @@ env_variables:
 
       # Google Cloud Storage
       FILESYSTEM_CLOUD: gcs
-      GOOGLE_CLOUD_PROJECT_ID: mennus-api
-      GOOGLE_CLOUD_STORAGE_BUCKET: mennus-images
+      GOOGLE_CLOUD_PROJECT_ID: menuus
+      GOOGLE_CLOUD_STORAGE_BUCKET: menuus-images
       GOOGLE_CLOUD_ACCOUNT_TYPE: type #default: service_account
       GOOGLE_CLOUD_PRIVATE_KEY_ID: private_key_id
       GOOGLE_CLOUD_PRIVATE_KEY: "-----BEGIN RSA PRIVATE KEY-----\n<PRIVATE_KEY_HERE>\n-----END RSA PRIVATE KEY-----"
@@ -52,7 +52,7 @@ env_variables:
       GOOGLE_CLOUD_TOKEN_URI: token_uri #default https://oauth2.googleapis.com/token
       GOOGLE_CLOUD_AUTH_PROVIDER_CERT_URL: auth_provider_x509_cert_url #default> https://www.googleapis.com/oauth2/v1/certs
       GOOGLE_CLOUD_CLIENT_CERT_URL: client_x509_cert_url
-      GOOGLE_CLOUD_DEFAULT_URL: https://storage.googleapis.com/mennus-images
+      GOOGLE_CLOUD_DEFAULT_URL: https://storage.googleapis.com/menuus-images
 
       PASSPORT_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n<PRIVATE_KEY_HERE>\n-----END RSA PRIVATE KEY-----"
       PASSPORT_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----\n<PUBLIC_KEY_HERE>\n-----END PUBLIC KEY-----"

@@ -38,7 +38,7 @@ class UsersSeeder extends Seeder
 
             $image = Images::create([
                 'name' => "Profile do usuário: $user->name",
-                'path' => "https://storage.googleapis.com/mennus-images/mock/avatars/$i.jpg",
+                'path' => "https://storage.googleapis.com/menuus-images/mock/avatars/$i.jpg",
             ]);
             
             CustomerProfiles::create([

@@ -66,7 +66,7 @@ return [
 
         'gcs' => [
             'driver' => 'gcs',
-            'project_id' => env('GOOGLE_CLOUD_PROJECT_ID', 'mennus-api'),
+            'project_id' => env('GOOGLE_CLOUD_PROJECT_ID', 'menuus'),
             'key_file' => [
                 'type' => env('GOOGLE_CLOUD_ACCOUNT_TYPE', 'service_account'),
                 'private_key_id' => env('GOOGLE_CLOUD_PRIVATE_KEY_ID'),
@@ -78,7 +78,7 @@ return [
                 'auth_provider_x509_cert_url' => env('GOOGLE_CLOUD_AUTH_PROVIDER_CERT_URL', 'https://www.googleapis.com/oauth2/v1/certs'),
                 'client_x509_cert_url' => env('GOOGLE_CLOUD_CLIENT_CERT_URL'),
             ],
-            'bucket' => env('GOOGLE_CLOUD_STORAGE_BUCKET', 'mennus-images'),
+            'bucket' => env('GOOGLE_CLOUD_STORAGE_BUCKET', 'menuus-images'),
             'path_prefix' => env('GOOGLE_CLOUD_STORAGE_PATH_PREFIX', null), // optional: /default/path/to/apply/in/bucket
             'storage_api_uri' => env('GOOGLE_CLOUD_STORAGE_API_URI', null), // see: Public URLs below
             'visibility' => 'public', // optional: public|private

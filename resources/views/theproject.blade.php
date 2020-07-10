@@ -33,7 +33,7 @@
                             <hr />
 
                             <div style="text-align: center;">
-                                <iframe src='https://view.officeapps.live.com/op/embed.aspx?src=https://storage.googleapis.com/mennus-images/Menuus.docx' width='831px' height='700px'>
+                                <iframe src='https://view.officeapps.live.com/op/embed.aspx?src=https://storage.googleapis.com/menuus-images/Menuus.docx' width='831px' height='700px'>
                                 </iframe>
                             </div>
 
